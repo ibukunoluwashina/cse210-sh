@@ -1,33 +1,30 @@
 using System;
+using System.Collections.Generic;
 
 class Program
 {
     static void Main(string[] args)
     {
+        List<int> numbers = new List<int>();
         
-        Random randomGenerator = new Random();
-        int magicNumber = randomGenerator.Next(1, 101);
-
-        int guess = -1;
-
-        while (guess != magicNumber)
+        int userNumber = -1;
+        while (userNumber != 0)
         {
-            Console.Write("What is your guess? ");
-            guess = int.Parse(Console.ReadLine());
+            Console.Write("Enter a number (0 to quit): ");
+            
+            string userResponse = Console.ReadLine();
+            userNumber = int.Parse(userResponse);
+            
+            if (userNumber != 0)
+            {
+                numbers.Add(userNumber);
+            }
+        }
 
-            if (magicNumber > guess)
-            {
-                Console.WriteLine("Higher");
-            }
-            else if (magicNumber < guess)
-            {
-                Console.WriteLine("Lower");
-            }
-            else
-            {
-                Console.WriteLine("You guessed it!");
-            }
+        int sum = 0;
+        foreach (int number in numbers)
+        {
+            sum += number;
+        }
 
-        }                    
-    }
-}
+        Console.WriteLine($"The sum is: {sum}");
