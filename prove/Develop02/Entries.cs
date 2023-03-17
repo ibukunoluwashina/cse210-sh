@@ -1,27 +1,24 @@
 using System;
 
-// creat the class
-
-public class newEntry
+public class Entry 
 {
-    // variable declarations so they can be re-used 2 reference
-    public string _question;
-    public string _Answer;
-    public string _date;
-    
-    public newEntry(string _question)
+    public string _date = "";
+    public string _prompt = "";
+    public string _userEntry = "";
+    public Prompts prompts = new Prompts();
+
+    public Entry()
     {
         DateTime theCurrentTime = DateTime.Now;
-        string dateText = theCurrentTime.ToShortDateString();
-        this._question = _question;
-        this._date = dateText;
+        string _date = theCurrentTime.ToShortDateString();
+        string _prompt = prompts.RandomQuestion();
+
+
+    {
+        public void Display()
+        {
+            Console.WriteLine($"{_date} - {_prompt}{_userEntry}");
+        }
     }
-
-    public void displayQ(string question){
-        Console.WriteLine(question);
     }
-
-
-
-       
 }
