@@ -1,24 +1,16 @@
 using System;
 
-public class Entry 
-{
-    public string _date = "";
-    public string _prompt = "";
-    public string _userEntry = "";
-    public Prompts prompts = new Prompts();
+public class Entry{
+    public DateTime date;
+    public string content;
 
     public Entry()
     {
-        DateTime theCurrentTime = DateTime.Now;
-        string _date = theCurrentTime.ToShortDateString();
-        string _prompt = prompts.RandomQuestion();
-
-
-    {
-        public void Display()
-        {
-            Console.WriteLine($"{_date} - {_prompt}{_userEntry}");
-        }
     }
+
+    public Entry(DateTime date, string content)
+    {
+        this.date = date;
+        this.content = content;
     }
 }
