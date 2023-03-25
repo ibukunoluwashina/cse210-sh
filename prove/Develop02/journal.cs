@@ -23,7 +23,8 @@ public class Journal
             }
         }
     }
-    public void LoadFromFile(string fileName){
+    public void LoadFromFile(string fileName, ReadOnlySpan<char> dateStr)
+    {
         entries.Clear();
  DateTime date = DateTime.Parse(dateStr);
         using (StreamReader reader = new StreamReader(fileName)){

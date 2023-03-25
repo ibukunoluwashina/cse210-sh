@@ -3,19 +3,36 @@ using System;
 
 public class EternalGoal : Goal
 {
-    private int _action = 0;
-    private int _point = 0;
+public bool IsCompleted { get; set; }
 
-    public EternalGoal(int action, int point) : base(action, point)
+
+public EternalGoal(string name, int pointValue) : base(name, pointValue)
+{
+    IsCompleted = false;
+}
+
+public override void RecordEvent()
+{
+    IsCompleted = true;
+}
+
+public override bool IsComplete()
+{
+    return IsCompleted;
+}
+
+public override int Score
+{
+    get
     {
-        times = _action;
-        point = _point;
+        if (IsComplete())
+        {
+            return PointValue;
+        }
+        else
+        {
+            return 0;
+        }
     }
-
-    public override GetGoal()
-    {
-        return _action * _point;
-    }
-
-    
+}
 }

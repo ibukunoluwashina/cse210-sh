@@ -1,36 +1,18 @@
 using System;
 
+public abstract class Goal
+{
+    public string Name { get; set; }
+    public int PointValue { get; set; }
 
+    public Goal(string name, int pointValue)
+{
+Name = name;
+PointValue = pointValue;
+}
+public abstract void RecordEvent();
 
-    public class Goal
-    {
-        protected string _action;
-        protected string _point;
+public abstract bool IsComplete();
 
-        public goal()
-        {
-
-        }
-
-        public string GetAction()
-        {
-            return action;
-        }
-
-        public void SetAction(string times)
-        {
-            _action = action;
-        }
-
-        public string point()
-        {
-            return _point;
-        }
-
-        public void SetPoint(string point)
-        {
-            point =_point;
-        }
-
-        public abstract GetGoal();
-    }
+public abstract int Score { get; }
+}
