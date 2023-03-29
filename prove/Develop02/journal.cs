@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Collections.Generic;
 
 public class Journal
 {
@@ -26,12 +28,12 @@ public class Journal
     public void LoadFromFile(string fileName, ReadOnlySpan<char> dateStr)
     {
         entries.Clear();
- DateTime date = DateTime.Parse(dateStr);
+ DateTime date = DateTime.Parse(header);
         using (StreamReader reader = new StreamReader(fileName)){
             while (!reader.EndOfStream) {
                 string dateStr = reader.ReadLine();
                 string content = reader.ReadLine();
-                DateTime date = DateTime.Parse(dateStr);
+                date  = DateTime.Parse(dateStr);
                 entries.Add(new Entry(){ date = date, content = content});
             }
         }

@@ -1,4 +1,4 @@
-class Program
+public class Program
 {
 
     static void Main(string[] args){
@@ -35,7 +35,9 @@ class Program
                 case 4:
                 Console.WriteLine("Enter a filename: ");
                 string fileNameLoad = Console.ReadLine();
-                journal.LoadFromFile(fileNameLoad);
+                string dateStr = Console.ReadLine();
+                ReadOnlySpan<char> dateStrSpan = new ReadOnlySpan<char>(dateStr.ToCharArray());
+                journal.LoadFromFile(fileNameLoad, dateStrSpan);
                 break;
 
                 case 5:
