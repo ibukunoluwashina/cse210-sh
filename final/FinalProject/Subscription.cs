@@ -12,7 +12,7 @@ public class Subscription
         this.basePrice = basePrice;
         this.duration = duration;
     }
-    public virtual void Display() // method to display the subscription package.
+    public virtual void Display() // virtual key word to calculate the subscription package to it can be change in other class.
     {
         Console.WriteLine("Subscrition details: ");
         Console.WriteLine($"- Base price: ${basePrice:F2}");
