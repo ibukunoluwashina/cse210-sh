@@ -1,3 +1,4 @@
+using System;
 public class Program
 {
     static List<Entry> journal = new List<Entry>();

@@ -1,5 +1,6 @@
 using System;
 
+
 public class PrompGenerator
 {
     public static DateTime GetDate() {
