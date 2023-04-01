@@ -3,36 +3,20 @@ using System;
 
 public class EternalGoal : Goal
 {
-public bool IsCompleted { get; set; }
-
-
-public EternalGoal(string name, int pointValue) : base(name, pointValue)
-{
-    IsCompleted = false;
-}
-
-public override void RecordEvent()
-{
-    IsCompleted = true;
-}
-
-public override bool IsComplete()
-{
-    return IsCompleted;
-}
-
-public override int Score
-{
-    get
+    public EternalGoal(string name, int PointValue)
     {
-        if (IsComplete())
-        {
-            return PointValue;
-        }
-        else
-        {
-            return 0;
-        }
+        Name = name;
+        PointValue = PointValue;
+        isComplete = false;
     }
-}
+
+    public override string GetProgress()
+    {
+        return "∞";
+    }
+
+    public override void RecordEvent()
+    {
+        PointValue += base.PointValue;
+    }
 }

@@ -1,38 +1,17 @@
 using System;
 public class SimpleGoal : Goal
 {
-public int TimesCompleted { get; set; }
-public int RequiredTimes { get; set; }
-
-
-
-public SimpleGoal(string name, int pointValue) : base(name, pointValue)
-{
-    RequiredTimes = 1;
-}
-
-public override void RecordEvent()
-{
-    TimesCompleted++;
-}
-
-public override bool IsComplete()
-{
-    return TimesCompleted >= RequiredTimes;
-}
-
-public override int Score
-{
-    get
+    public class SimpleGoal : Goal
     {
-        if (IsComplete())
+        public SimpleGoal(string name, int PointValue)
         {
-            return PointValue;
+            Name = name;
+            PointValue = PointValue;
+            isComplete = false;
         }
-        else
+        public override string GetProgress()
         {
-            return 0;
+            return isComplete ? "[x]" : "[ ]";
         }
     }
-}
 }

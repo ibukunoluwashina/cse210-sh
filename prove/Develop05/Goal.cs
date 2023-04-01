@@ -4,15 +4,12 @@ public abstract class Goal
 {
     public string Name { get; set; }
     public int PointValue { get; set; }
+    public bool isComplete{get; set;}
 
-    public Goal(string name, int pointValue)
+    public abstract string GetProgress();
+
+    public virtual void RecordEvent()
 {
-Name = name;
-PointValue = pointValue;
+    isComplete = true;
 }
-public abstract void RecordEvent();
-
-public abstract bool IsComplete();
-
-public abstract int Score { get; }
 }
