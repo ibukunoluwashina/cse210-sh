@@ -6,14 +6,14 @@ using System.Text.Json;
 class Program
 {
     static List<Goal> goals = new List<Goal>();
-    static int scoren = 0;
+    static int score = 0;
     static void Main(string[] args)
     {
         LoadData();
 
         while (true)
         {
-            Console.WriteLine("You have 0 points");
+            Console.WriteLine($"You have {score} points");
             Console.WriteLine("Menu options:");
             Console.WriteLine(" 1. View Goals");
             Console.WriteLine(" 2. Creat New Goal");
@@ -30,7 +30,7 @@ class Program
                     break;
 
                 case 2:
-                    AddGoals();
+                    AddGoal();
                     break;
 
                 case 3:
@@ -41,6 +41,7 @@ class Program
                     SaveData();
                     Console.WriteLine("Your progress has been saved. Goodbye");
                     return;
+
                 default:
                     Console.WriteLine("invalid option. please try again");
                     break;
@@ -57,7 +58,7 @@ class Program
         }
         Console.WriteLine($"Total score: {score} points");
     }
-    static void AddGoals()
+    static void AddGoal()
     {
         Console.WriteLine("What type of goal would you like to add?");
         Console.WriteLine("1. Simple goal");
@@ -70,18 +71,18 @@ class Program
         string name = Console.ReadLine();
 
         Console.WriteLine("whats the amount of point associated with this goal?");
-        int PointValue = int.Parse(Console.ReadLine());
+        int pointValue = int.Parse(Console.ReadLine());
 
         switch (choice)
         {
             case 1:
-                SimpleGoal simpleGoal = new SimpleGoal(name, PointValue);
+                SimpleGoal simpleGoal = new SimpleGoal(name, pointValue);
                 goals.Add(simpleGoal);
                 Console.WriteLine($"{name} has been added to a simple goal worth {pointValue} points.");
                 break;
 
             case 2:
-                EternalGoal eternalGoal = new EternalGoal(name, PointValue);
+                EternalGoal eternalGoal = new EternalGoal(name, pointValue);
                 goals.Add(eternalGoal);
                 Console.WriteLine($"{name} has been added as an eternal goal worth {pointValue} points.");
                 break;
@@ -89,7 +90,7 @@ class Program
             case 3:
                 Console.WriteLine("How many times must you complete this goal?");
                 int targetCount = int.Parse(Console.ReadLine());
-                ChecklistGoal checklistGoal = new ChecklistGoal(name, PointValue, targetCount);
+                ChecklistGoal checklistGoal = new ChecklistGoal(name, pointValue, targetCount);
                 goals.Add(checklistGoal);
                 Console.WriteLine($"{name} has been added as a checklist goal worth {pointValue} points.");
                 break;
@@ -106,13 +107,14 @@ class Program
         {
             Console.WriteLine($"{i + 1}. {goals[i].Name}");
         }
+
         int choice = int.Parse(Console.ReadLine());
 
         if (choice <= goals.Count && choice > 0)
         {
             Goal chosenGoal = goals[choice - 1];
             chosenGoal.RecordEvent();
-            scoren += chosenGoal.PointValue;
+            score += chosenGoal.PointValue;
             Console.WriteLine($"{chosenGoal.Name} event recorded. you earned {chosenGoal.PointValue} points.");
         }
         else
@@ -122,21 +124,18 @@ class Program
     }
     static void SaveData()
     {
-        FileStream fileStream = new FileStream("data.bin", FileMode.Create);
-        BinaryFormatter formatter = new BinaryFormatter();
-        formatter.Serialize(fileStream, goals);
-        formatter.Serialize(fileStream, score);
-        fileStream.Close();
+        string json = JsonSerializer.Serialize(goals);
+        File.WriteAllText("data.json", json);
+
+        Console.WriteLine("Your progress has been saved. Goodbye");
     }
     static void LoadData()
     {
-        if (File.Exists("data.bin"))
+        if (File.Exists("data.json"))
         {
-            FileStream fileStream = new FileStream("data.bin", FileMode.Open);
-            BinaryFormatter formatter = new BinaryFormatter();
-            goals = (List<Goal>)formatter.Deserialize(fileStream);
-            score = (int)formatter.Deserialize(fileStream);
-            fileStream.Close();
+            string json = File.ReadAllText("data.json");
+            goals = JsonSerializer.Deserialize<List<Goal>>(json);
+            Console.WriteLine("Save data loaded. ");
         }
         else
         {

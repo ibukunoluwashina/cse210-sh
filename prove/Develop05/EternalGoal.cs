@@ -1,12 +1,11 @@
 using System;
 
-
 public class EternalGoal : Goal
 {
-    public EternalGoal(string name, int PointValue)
+    public EternalGoal(string name, int pointValue)
     {
         Name = name;
-        PointValue = PointValue;
+        PointValue = pointValue;
         isComplete = false;
     }
 

@@ -1,12 +1,14 @@
+using System;
+
 public class ChecklistGoal : Goal
 {
     public int TargetCount{get; set;}
     public int CompletionCount{get; set;}
 
-    public ChecklistGoal(string name, int PointValue, int TargetCount)
+    public ChecklistGoal(string name, int pointValue, int targetCount)
     {
         Name = name;
-        PointValue = PointValue;
+        PointValue = pointValue;
         isComplete = false;
         TargetCount = targetCount;
         CompletionCount = 0;
@@ -23,7 +25,7 @@ public class ChecklistGoal : Goal
         PointValue += base.PointValue;
         if(CompletionCount == TargetCount)
         {
-            PointValue +=500;
+            PointValue += 500;
             isComplete = true;
         }
     }
